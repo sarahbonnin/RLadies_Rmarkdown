@@ -1,6 +1,6 @@
 ---
 title: "Introduction to {rmarkdown}"
-subtitle: "![](https://rubenfcasal.github.io/bookdown_intro/images/rmarkdown.png){#id .class width=30% height=30%}<br/>R-ladies BCN"
+subtitle: "![](https://bookdown.org/yihui/rmarkdown/images/hex-rmarkdown.png){#id .class width=30% height=30%}<br/>R-ladies BCN"
 author: "Sarah Bonnin"
 date: "2019-12-12"
 output:
@@ -13,8 +13,322 @@ output:
       countIncrementalSlides: false
 ---
 
-## What is {rmarkdown} ?
+## What is R markdown ?
 
+Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents.
+* Reporting
+* Graphs / tables along with the code
+* Reproducible
+
+---
+
+## Install and load
+
+{rmarkdown} package
+
+```{r, eval=FALSE}
+install.packages("rmarkdown")
+```
+```{r, eval=TRUE}
+library(rmarkdown)
+```
+
+```{r, eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+```
+
+---
+
+## RMD file and rendering
+
+```{r, out.width="100%", echo=FALSE, fig.align="center"}
+knitr::include_graphics("images/RMD_knit.png")
+```
+
+---
+
+## Create an .rmd file in R Studio
+
+File -> New File -> R Markdown...
+
+MISSING screenshots (how to create file + selection of title and output)
+
+
+---
+
+## Different blocks
+
+SCREENSHOT FROM NEW entire FILE
+
+* Header
+
+* Code chunks
+
+* (Formatted) text
+
+---
+
+## Header
+
+```{r,eval=FALSE, echo=TRUE}
+---
+title: "TEST"
+author: "Sarah Bonnin"
+date: "12/8/2019"
+output: html_document
+---
+```
+
+YAML header start and end with three dashes (---)
+
+---
+
+## Format text
+
+```{r, echo=TRUE, eval=FALSE}
+ *Italic* / _Italic_
+ **Bold** / __Bold__
+ ***Bold + Italic*** / ___Bold + Italic___
+ superscript^2^   
+ ~~strikethrough~~  
+```
+
+*Italic* / _Italic_
+
+**Bold** / __Bold__
+
+***Bold + Italic*** / ___Bold + Italic___
+
+Superscript^2^   
+ 
+~~Strikethrough~~ 
+
+---
+
+## Format text
+### Headers
+
+````r
+# Header 1
+## Header 2
+### Header 3
+#### Header 4
+````
+
+# Header 1
+## Header 2
+### Header 3
+#### Header 4
+
+---
+
+## Lists
+
+### unordered
+
+````
+ * first item
+ * second item
+   * first sub-item
+   * second sub-item
+````
+
+* first item
+* second item
+  * first sub-item
+  * second sub-item
+
+---
+
+## Lists
+
+### ordered
+
+````r
+ 1. first ordered item
+ 2. second ordered item
+   + first sub-item
+   + second sub-item
+````
+
+1. first ordered item
+2. second ordered item
+  + first sub-item
+  + second sub-item
+
+---
+
+## Code blocks
+### Options
+
+
+```{r, out.width="100%", echo=FALSE, fig.align="center"}
+knitr::include_graphics("images/RMD_options.png")
+```
+
+---
+
+## Code blocks
+
+Include options globally:
+
+````r
+`r ''````{r setup, include=FALSE}
+ knitr::opts_chunk$set(echo = TRUE)
+```
+````
+
+---
+
+## Code blocks: examples
+
+The following code:
+
+````r
+`r ''````{r, eval=TRUE, echo=TRUE, message=TRUE}
+ ggplot(data=cars, aes(x=speed)) + geom_histogram()
+```
+````
+
+Renders as:
+
+```{r, eval=TRUE, echo=TRUE, message=TRUE}
+ ggplot(data=cars, aes(x=speed)) + geom_histogram()
+```
+
+---
+
+## Code blocks: examples
+
+The following code:
+
+````r
+`r ''````{r, eval=TRUE, echo=TRUE, message=TRUE, fig.height=3}
+ ggplot(data=cars, aes(x=speed)) + geom_histogram()
+```
+````
+
+Renders as:
+
+```{r, eval=TRUE, echo=TRUE, message=TRUE, fig.height=3}
+ ggplot(data=cars, aes(x=speed)) + geom_histogram()
+```
+
+---
+
+## Code blocks: examples
+
+The following code:
+
+````r
+`r ''````{r, eval=TRUE, echo=TRUE, message=FALSE, fig.height=3}
+ ggplot(data=cars, aes(x=speed)) + geom_histogram()
+```
+````
+
+Renders as:
+
+```{r, eval=TRUE, echo=TRUE, message=FALSE, fig.height=3}
+ ggplot(data=cars, aes(x=speed)) + geom_histogram()
+```
+
+---
+
+## Code blocks: examples
+
+The following code:
+
+````r
+`r ''````{r, eval=TRUE, echo=FALSE, message=FALSE, fig.height=3}
+ ggplot(data=cars, aes(x=speed)) + geom_histogram()
+```
+````
+
+Renders as:
+
+```{r, eval=TRUE, echo=FALSE, message=FALSE, fig.height=3}
+ ggplot(data=cars, aes(x=speed)) + geom_histogram()
+```
+
+---
+
+## Code blocks: examples
+
+The following code:
+
+````r
+`r ''````{r, eval=FALSE, echo=TRUE, message=FALSE, fig.height=3}
+ ggplot(data=cars, aes(x=speed)) + geom_histogram()
+```
+````
+
+Renders as:
+
+```{r, eval=FALSE, echo=TRUE, message=FALSE, fig.height=3}
+ ggplot(data=cars, aes(x=speed)) + geom_histogram()
+```
+
+---
+
+## Code blocks: examples
+
+The following code:
+
+````r
+`r ''````{r, eval=FALSE, echo=FALSE, message=FALSE, fig.height=3}
+ ggplot(data=cars, aes(x=speed)) + geom_histogram()
+```
+````
+
+Renders as:
+
+```{r, eval=FALSE, echo=FALSE, message=FALSE, fig.height=3}
+ ggplot(data=cars, aes(x=speed)) + geom_histogram()
+```
+
+---
+
+## Code blocks: examples (tidy)
+
+The following code:
+
+````r
+`r ''````{r, eval=FALSE, echo=TRUE, message=FALSE, fig.height=3, tidy=TRUE}
+ ggplot(data=cars,aes(x=speed))+geom_histogram()
+```
+````
+
+Renders as:
+
+```{r, eval=FALSE, echo=TRUE, message=FALSE, fig.height=3, tidy=TRUE}
+ ggplot(data=cars,aes(x=speed))+geom_histogram()
+```
+
+---
+
+## Insert images
+
+````r
+image: ![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png) 
+````
+image: ![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png){width=50%}
+
+---
+
+## Insert images
+
+````r
+<div style="width:300px; height:200px">
+image: ![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png) 
+</div>
+````
+
+<div style="width:300px; height:200px">
+image: ![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png) 
+</div>
+
+---
+## 
 
 * Create an R markdown file in R studio
 * Different sections of R markdown (header and body)
