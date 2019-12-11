@@ -174,7 +174,11 @@ str="`\u0060`"
 
 ## First knit!
 
+Knit **.Rmd** file to HTML!
 
+```{r, out.width="40%", echo=FALSE, fig.align="center"}
+knitr::include_graphics("images/RMD_knit_template.png")
+```
 
 ---
 
