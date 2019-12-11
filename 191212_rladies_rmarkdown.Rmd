@@ -34,19 +34,19 @@ output:
 
 --
 
-* Includes R code that can be **shown** and/or **exectuted**
+* Includes R code that can be **shown** and/or **executed**
 
 --
 
-* Easy to report and share analysis.
+* Easy to **report** and **share** analysis.
 
 --
 
-* Reproducibility and transparency.
+* **Reproducibility** and **transparency**.
 
 --
 
-* Produce high quality documents.
+* Produce **high quality documents**.
 
 --
 
@@ -69,6 +69,8 @@ library(rmarkdown)
 
 ```{r, eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2)
+library(dplyr)
+library(kableExtra)
 ```
 
 ---
@@ -150,6 +152,23 @@ knitr::include_graphics("images/RMD_choose_output.png")
 knitr::include_graphics("images/RMD_template.png")
 ```
 
+---
+
+## First knit!
+
+Knit **.Rmd** file to HTML!
+
+```{r, out.width="35%", echo=FALSE, fig.align="center"}
+knitr::include_graphics("images/RMD_knit_template.png")
+```
+
+---
+
+## First knit!
+
+```{r, out.width="60%", echo=FALSE, fig.align="center"}
+knitr::include_graphics("images/RMD_knit_template_output.png")
+```
 
 ---
 
@@ -171,17 +190,6 @@ str="`\u0060`"
 * (Formatted) text
 
 ---
-
-## First knit!
-
-Knit **.Rmd** file to HTML!
-
-```{r, out.width="40%", echo=FALSE, fig.align="center"}
-knitr::include_graphics("images/RMD_knit_template.png")
-```
-
----
-
 
 ## Header
 
@@ -211,6 +219,8 @@ output: html_document
  ~~strikethrough~~  
 ```
 
+--
+
 *Italic* / _Italic_
 
 **Bold** / __Bold__
@@ -233,6 +243,8 @@ Superscript^2^
 #### Header 4
 ````
 
+--
+
 # Header 1
 ## Header 2
 ### Header 3
@@ -251,6 +263,8 @@ Superscript^2^
    * second sub-item
 ````
 
+--
+
 * first item
 * second item
   * first sub-item
@@ -268,6 +282,8 @@ Superscript^2^
    + first sub-item
    + second sub-item
 ````
+    
+--
 
 1. first ordered item
 2. second ordered item
@@ -286,18 +302,6 @@ Customize the rendering with **options**:
 ```{r, out.width="95%", echo=FALSE, fig.align="center"}
 knitr::include_graphics("images/RMD_options.png")
 ```
-
----
-
-## Code blocks
-
-Include options globally:
-
-````r
-`r ''````{r setup, include=FALSE}
- knitr::opts_chunk$set(echo = TRUE)
-```
-````
 
 ---
 
@@ -427,6 +431,18 @@ Renders as:
 
 ---
 
+## Code blocks
+
+Include options globally:
+
+````r
+`r ''````{r setup, include=FALSE}
+ knitr::opts_chunk$set(echo = TRUE, tidy = TRUE, message = FALSE)
+```
+````
+
+---
+
 ## Code blocks: Python and bash
 
 {rmarkdown} can also execute, for example, **bash** and **Python** blocks of code.
@@ -471,27 +487,11 @@ print(x.split(' '))
 
 ## Code blocks: knitr language engines
 
-{rmarkdown} can actually execute many different languages!
+{rmarkdown} can execute **many different languages!**
 
 --
 
 See this [knitr language engines guide](https://bookdown.org/yihui/rmarkdown/language-engines.html)
-
----
-
-## Insert images
-
-Standard Rmd way:
-
---
-
-````r
-![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png) 
-````
-
---
-
-![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png)
 
 ---
 
@@ -542,32 +542,133 @@ You can **link** web pages:
 --
 
 ````r
-[link to RMD page]("https://rmarkdown.rstudio.com/")
+Here is a [link]("https://rmarkdown.rstudio.com/") to {rmarkdown} page on [R Studio](https://rstudio.com/) website.
 ````
 
 --
 
-[link to RMD page]("https://rmarkdown.rstudio.com/")
+Here is a [link]("https://rmarkdown.rstudio.com/") to {rmarkdown} page on [R Studio](https://rstudio.com/) website.
+
+---
+
+## Tables
+
+Format tables with **knitr::kable** and [**{kableExtra}**](http://haozhu233.github.io/kableExtra/awesome_table_in_html.html) package.
+
+````r
+`r ''````{r}
+knitr::kable(head(iris))
+```
+````
+
+--
+
+```{r, echo=F}
+knitr::kable(head(iris))
+```
+
+---
+
+## Tables
+
+**Bold** columns
+
+````r
+`r ''````{r}
+knitr::kable(head(iris)) %>%
+  column_spec(1:2, bold = TRUE)
+```
+````
+
+--
+
+```{r, echo=F}
+knitr::kable(head(iris)) %>%
+  column_spec(1:2, bold = TRUE)
+```
+
+---
+
+## Tables
+
+**Colored** rows
+
+````r
+`r ''````{r}
+knitr::kable(head(iris)) %>%
+  row_spec(1:3, color = "white", background = "red")
+```
+````
+
+--
+
+```{r, echo=F}
+knitr::kable(head(iris)) %>%
+  row_spec(1:3, color = "white", background = "red")
+```
+
+---
+
+## Tables
+
+Change **font size**
+
+````r
+`r ''````{r}
+knitr::kable(head(iris)) %>%
+  kable_styling(font_size = 8)
+```
+````
+
+--
+
+```{r, echo=F}
+knitr::kable(head(iris)) %>%
+  kable_styling(font_size = 8)
+```
+
+---
+
+## Tables
+
+All together
+
+````r
+`r ''````{r}
+knitr::kable(head(iris)) %>%
+  kable_styling(font_size = 8) %>%
+  row_spec(1:3, color = "white", background = "red") %>%
+  column_spec(1:2, bold = TRUE)
+```
+````
+
+--
+
+```{r, echo=F}
+knitr::kable(head(iris)) %>%
+  kable_styling(font_size = 8) %>%
+  row_spec(1:3, color = "white", background = "red") %>%
+  column_spec(1:2, bold = TRUE)
+```
 
 
 ---
 
-## 
+## Hands on !
 
-* Create an R markdown file in R studio
-* Different sections of R markdown (header and body)
-  * program output
-* Write a bloc of rmarkdown (include table of code chunks instruction):
-  * executing code
-  * hiding code
-  * hide warnings
-* Format text in R markdown
-  * headers
-  * italic, bold, underline
-  * list (ordered and unordered)
-  * tables (kable)
-  * insert external images
-  
+Modify your **.Rmd template**:
+
+--
+
+* Modify global options so blocks of code are always **tidy**.
+
+--
+
+* Format **summary(cars)** with **kable** and **{kableExtra}**: highlight in yellow the "Median" row.
+
+--
+
+* **plot(pressure)**: show code but hide plot.
 
 ---
 
@@ -585,33 +686,3 @@ Follow us on Twitter ! @RLadiesBCN
 ```{r, echo=FALSE, out.width="55%", fig.align="center"}
 knitr::include_graphics("https://media.giphy.com/media/SMKiEh9WDO6ze/giphy.gif")
 ```
-
-
----
-# Some resources
-
-* [Tidyverse website](https://www.tidyverse.org/)
-
-* [R Studio cheatsheet](https://rstudio.com/resources/cheatsheets/)
-
-* [R for data science](https://r4ds.had.co.nz/)
-
-* [Text mining with R](https://www.tidytextmining.com/)
-
-* [Advanced R](https://adv-r.hadley.nz/)
-
----
-
-class: inverse
-
-# Let's see what you have learnt today !
-
-```{r, out.width="40%", echo=FALSE, fig.align="center"}
-knitr::include_graphics("https://media.giphy.com/media/1BgNCE4bMilwje4SBi/giphy.gif")
-```
-
-Go to:
-
-#[kahoot.it](https://kahoot.it/)
-
----
