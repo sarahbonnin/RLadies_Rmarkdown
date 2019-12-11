@@ -13,9 +13,20 @@ output:
       countIncrementalSlides: false
 ---
 
+## What is MarkDown ?
+
+MarkDown is a **lightweight markup language** that allows to write **easy-to-read** and **easy-to-write** plain text format that can be converted into HTML.
+
+
+---
+
 ## What is R MarkDown ?
 
-R MarkDown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents.
+R MarkDown is a **simple formatting syntax** for authoring **HTML, PDF, and MS Word** documents.
+
+--
+
+* Includes R code that can be optionally **shown** and/or **exectuted**
 
 --
 
@@ -76,7 +87,7 @@ R MarkDown [Cheatsheet](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown
 
 ## How does it work?
 
-* {rmarkdown} feeds the input **.Rmd** file to **{knitr}**
+* **{rmarkdown}** feeds the input **.Rmd** file to **{knitr}**
 
 --
 
@@ -141,15 +152,23 @@ str="`\u0060`"
 #**`` `r str` ``**
 ```
 
-* Header (optional) in **YAML** format surrounded by **---**
+* Header (optional) in **YAML** format surrounded by **3 dashes**
 
-* Code chunks surrounded by 
+--
+
+* R code chunks surrounded by **3 back ticks**
+
+--
 
 * (Formatted) text
 
 ---
 
 ## Header
+
+YAML header is surrounded by 3 dashes (**---**)
+
+--
 
 ```{r,eval=FALSE, echo=TRUE}
 ---
@@ -160,7 +179,6 @@ output: html_document
 ---
 ```
 
-YAML header is surrounded by three dashes (**---**)
 
 ---
 
@@ -243,6 +261,8 @@ Superscript^2^
 ### Options
 
 Customize the rendering with **options**:
+
+--
 
 ```{r, out.width="95%", echo=FALSE, fig.align="center"}
 knitr::include_graphics("images/RMD_options.png")
@@ -390,24 +410,58 @@ Renders as:
 
 ## Insert images
 
+Standard Rmd way:
+
+--
+
 ````r
-image: ![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png) 
+![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png) 
 ````
-image: ![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png){width=50%}
+
+--
+
+![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png)
 
 ---
 
 ## Insert images
 
+Recommended / easier to format way with **knitr::include_graphics**:
+
+--
+
 ````r
-<div style="width:300px; height:200px">
-image: ![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png) 
-</div>
+`r ''````{r}
+knitr::include_graphics("ihttps://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png")
+```
 ````
 
-<div style="width:300px; height:200px">
-image: ![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png) 
-</div>
+--
+
+```{r}
+knitr::include_graphics("https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png")
+```
+
+
+---
+
+## Insert images
+
+Recommended / easier to format way with **knitr::include_graphics**:
+
+--
+
+````r
+`r ''````{r, out.width="50%", echo=FALSE, fig.align="center"}
+knitr::include_graphics("ihttps://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png")
+```
+````
+
+--
+
+```{r, out.width="50%", echo=FALSE, fig.align="center"}
+knitr::include_graphics("https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png")
+```
 
 ---
 ## 

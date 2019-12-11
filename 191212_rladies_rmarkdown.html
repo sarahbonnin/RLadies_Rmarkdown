@@ -21,9 +21,20 @@ class: center, middle, inverse, title-slide
 ---
 
 
+## What is MarkDown ?
+
+MarkDown is a **lightweight markup language** that allows to write **easy-to-read** and **easy-to-write** plain text format that can be converted into HTML.
+
+
+---
+
 ## What is R MarkDown ?
 
-R MarkDown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents.
+R MarkDown is a **simple formatting syntax** for authoring **HTML, PDF, and MS Word** documents.
+
+--
+
+* Includes R code that can be optionally **shown** and/or **exectuted**
 
 --
 
@@ -82,7 +93,7 @@ R MarkDown [Cheatsheet](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown
 
 ## How does it work?
 
-* {rmarkdown} feeds the input **.Rmd** file to **{knitr}**
+* **{rmarkdown}** feeds the input **.Rmd** file to **{knitr}**
 
 --
 
@@ -134,15 +145,23 @@ Choose output:
 
 
 
-* Header (optional) in **YAML** format surrounded by **---**
+* Header (optional) in **YAML** format surrounded by **3 dashes**
 
-* Code chunks surrounded by 
+--
+
+* R code chunks surrounded by **3 back ticks**
+
+--
 
 * (Formatted) text
 
 ---
 
 ## Header
+
+YAML header is surrounded by 3 dashes (**---**)
+
+--
 
 
 ```r
@@ -154,7 +173,6 @@ output: html_document
 ---
 ```
 
-YAML header is surrounded by three dashes (**---**)
 
 ---
 
@@ -238,6 +256,8 @@ Superscript^2^
 ### Options
 
 Customize the rendering with **options**:
+
+--
 
 &lt;img src="images/RMD_options.png" width="95%" style="display: block; margin: auto;" /&gt;
 
@@ -398,24 +418,65 @@ ggplot(data = cars, aes(x = speed)) + geom_histogram()
 
 ## Insert images
 
+Standard Rmd way:
+
+--
+
 ````r
-image: ![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png) 
+![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png) 
 ````
-image: ![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png){width=50%}
+
+--
+
+![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png)
 
 ---
 
 ## Insert images
 
+Recommended / easier to format way with **knitr::include_graphics**:
+
+--
+
 ````r
-&lt;div style="width:300px; height:200px"&gt;
-image: ![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png) 
-&lt;/div&gt;
+```{r}
+knitr::include_graphics("ihttps://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png")
+```
 ````
 
-&lt;div style="width:300px; height:200px"&gt;
-image: ![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png) 
-&lt;/div&gt;
+--
+
+
+```r
+knitr::include_graphics("https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png")
+```
+
+![](https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png)&lt;!-- --&gt;
+
+
+---
+
+## Insert images
+
+Recommended / easier to format way with **knitr::include_graphics**:
+
+--
+
+````r
+```{r, out.width="50%", echo=FALSE, fig.align="center"}
+knitr::include_graphics("ihttps://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png")
+```
+````
+
+--
+
+&lt;img src="https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Insert images
+
 
 ---
 ## 
@@ -523,24 +584,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     deleted = true;
   });
-})();
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
-
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
+})();</script>
 
 <script>
 (function() {
