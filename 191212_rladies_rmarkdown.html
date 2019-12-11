@@ -23,18 +23,26 @@ class: center, middle, inverse, title-slide
 
 ## What is MarkDown ?
 
-MarkDown is a **lightweight markup language** that allows to write **easy-to-read** and **easy-to-write** plain text format that can be converted into HTML.
+* **Lightweight markup language** 
+
+--
+
+* Write **easy-to-read** and **easy-to-write** plain text format
+
+--
+
+* Convertion into **HTML**
 
 
 ---
 
 ## What is R MarkDown ?
 
-R MarkDown is a **simple formatting syntax** for authoring **HTML, PDF, and MS Word** documents.
+* **Simple formatting syntax** for authoring **HTML, PDF, and MS Word** documents.
 
 --
 
-* Includes R code that can be optionally **shown** and/or **exectuted**
+* Includes R code that can be **shown** and/or **exectuted**
 
 --
 
@@ -416,6 +424,84 @@ ggplot(data = cars, aes(x = speed)) + geom_histogram()
 
 ---
 
+## Code blocks: Python and bash
+
+{rmarkdown} can also execute, for example, **bash** and **Python** blocks of code.
+
+--
+
+````bash
+```{bash}
+ls *
+```
+````
+
+--
+
+
+```bash
+ls *
+```
+
+```
+## 191212_rladies_rmarkdown.html
+## 191212_rladies_rmarkdown.Rmd
+## README.md
+## 
+## 191212_rladies_rmarkdown_files:
+## figure-html
+## 
+## images:
+## RMD_choose_output.png
+## RMD_create.png
+## RMD_knit.png
+## RMD_options.png
+## RMD_template.png
+## 
+## libs:
+## kePrint-0.0.1
+## remark-css-0.0.1
+```
+
+---
+
+## Code blocks: Python and bash
+
+{rmarkdown} can also execute, for example, **bash** and **Python** blocks of code.
+
+--
+
+````python
+```{python}
+x = 'Rladies Barcelona'
+print(x.split(' '))
+```
+````
+
+--
+
+
+```python
+x = 'Rladies Barcelona'
+print(x.split(' '))
+```
+
+```
+## ['Rladies', 'Barcelona']
+```
+
+---
+
+## Code blocks: knitr language engines
+
+{rmarkdown} can actually execute many different languages!
+
+--
+
+See this [knitr language engines guide](https://bookdown.org/yihui/rmarkdown/language-engines.html)
+
+---
+
 ## Insert images
 
 Standard Rmd way:
@@ -472,13 +558,19 @@ knitr::include_graphics("ihttps://rladies.org/wp-content/uploads/2016/12/R-Ladie
 
 &lt;img src="https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png" width="50%" style="display: block; margin: auto;" /&gt;
 
+---
+
+## Links
+
+````r
+[link to RMD page]("https://rmarkdown.rstudio.com/")
+````
+
+[link to RMD page]("https://rmarkdown.rstudio.com/")
+
 
 ---
 
-## Insert images
-
-
----
 ## 
 
 * Create an R markdown file in R studio
@@ -584,7 +676,24 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     deleted = true;
   });
-})();</script>
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
 (function() {

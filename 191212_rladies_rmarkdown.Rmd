@@ -15,18 +15,26 @@ output:
 
 ## What is MarkDown ?
 
-MarkDown is a **lightweight markup language** that allows to write **easy-to-read** and **easy-to-write** plain text format that can be converted into HTML.
+* **Lightweight markup language** 
+
+--
+
+* Write **easy-to-read** and **easy-to-write** plain text format
+
+--
+
+* Convertion into **HTML**
 
 
 ---
 
 ## What is R MarkDown ?
 
-R MarkDown is a **simple formatting syntax** for authoring **HTML, PDF, and MS Word** documents.
+* **Simple formatting syntax** for authoring **HTML, PDF, and MS Word** documents.
 
 --
 
-* Includes R code that can be optionally **shown** and/or **exectuted**
+* Includes R code that can be **shown** and/or **exectuted**
 
 --
 
@@ -408,6 +416,58 @@ Renders as:
 
 ---
 
+## Code blocks: Python and bash
+
+{rmarkdown} can also execute, for example, **bash** and **Python** blocks of code.
+
+--
+
+````bash
+`r ''````{bash}
+ls *
+```
+````
+
+--
+
+```{bash}
+ls *
+```
+
+---
+
+## Code blocks: Python and bash
+
+{rmarkdown} can also execute, for example, **bash** and **Python** blocks of code.
+
+--
+
+````python
+`r ''````{python}
+x = 'Rladies Barcelona'
+print(x.split(' '))
+```
+````
+
+--
+
+```{python, python.reticulate=FALSE}
+x = 'Rladies Barcelona'
+print(x.split(' '))
+```
+
+---
+
+## Code blocks: knitr language engines
+
+{rmarkdown} can actually execute many different languages!
+
+--
+
+See this [knitr language engines guide](https://bookdown.org/yihui/rmarkdown/language-engines.html)
+
+---
+
 ## Insert images
 
 Standard Rmd way:
@@ -464,6 +524,23 @@ knitr::include_graphics("https://rladies.org/wp-content/uploads/2016/12/R-Ladies
 ```
 
 ---
+
+## Links
+
+You can **link** web pages:
+--
+
+````r
+[link to RMD page]("https://rmarkdown.rstudio.com/")
+````
+
+--
+
+[link to RMD page]("https://rmarkdown.rstudio.com/")
+
+
+---
+
 ## 
 
 * Create an R markdown file in R studio
