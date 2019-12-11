@@ -22,28 +22,31 @@ class: center, middle, inverse, title-slide
 ---
 
 
-## What is MarkDown ?
+## What is Markdown ?
+
+--
 
 * **Lightweight markup language** 
 
 --
 
-* Write **easy-to-read** and **easy-to-write** plain text format
+* **Easy-to-read** and **easy-to-write** plain text format
 
 --
 
-* Convertion into **HTML**
-
+* Rendered as **HTML** document through [Blackfriday](https://gohugo.io/getting-started/configuration/)
 
 ---
 
-## What is R MarkDown ?
-
-* **Simple formatting syntax** for authoring **HTML, PDF, and MS Word** documents.
+## What is R Markdown ?
 
 --
 
-* Includes R code that can be **shown** and/or **executed**
+* Advanced version of "plain" Markdown: **embeds** and **executes R code**
+
+--
+
+* **Simple formatting syntax** for authoring **HTML, PDF, and MS Word** documents.
 
 --
 
@@ -80,13 +83,13 @@ library(rmarkdown)
 
 ---
 
-## R MarkDown Cheatsheet
+## R Markdown Cheatsheet
 
-R MarkDown [Cheatsheet](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)
+R Markdown [Cheatsheet](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)
 
 ---
 
-## R MarkDown (RMD) file
+## R Markdown (RMD) file
 
 * Plain text file
 
@@ -102,6 +105,12 @@ R MarkDown [Cheatsheet](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown
 
 ## How does it work?
 
+--
+
+&lt;img src="https://d33wubrfki0l68.cloudfront.net/61d189fd9cdf955058415d3e1b28dd60e1bd7c9b/b739c/lesson-images/rmarkdownflow.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+--
+
 * **{rmarkdown}** feeds the input **.Rmd** file to **{knitr}**
 
 --
@@ -112,15 +121,11 @@ R MarkDown [Cheatsheet](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown
 
 * The **.md** file is then fed to **pandoc** that creates the final output
 
---
-
-&lt;img src="https://d33wubrfki0l68.cloudfront.net/61d189fd9cdf955058415d3e1b28dd60e1bd7c9b/b739c/lesson-images/rmarkdownflow.png" width="90%" style="display: block; margin: auto;" /&gt;
-
 ---
 
-## R MarkDown file and rendering
+## R Markdown file and rendering
 
-Exemple of a **source file** and its **rendering**:
+Example of a **source file** and its **rendering**:
 
 &lt;img src="images/RMD_knit.png" width="100%" style="display: block; margin: auto;" /&gt;
 
@@ -136,14 +141,14 @@ File -&gt; New File -&gt; R Markdown...
 
 ## Create an .Rmd file in R Studio
 
-Choose output:
+Choose output format:
 
 &lt;img src="images/RMD_choose_output.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
-## Blocks
+## Template .Rmd file
 
 &lt;img src="images/RMD_template.png" width="65%" style="display: block; margin: auto;" /&gt;
 
@@ -151,7 +156,7 @@ Choose output:
 
 ## First knit!
 
-Knit **.Rmd** file to HTML!
+Knit the template **.Rmd** file to HTML!
 
 &lt;img src="images/RMD_knit_template.png" width="35%" style="display: block; margin: auto;" /&gt;
 
@@ -181,7 +186,7 @@ Knit **.Rmd** file to HTML!
 
 ## Header
 
-YAML header is surrounded by 3 dashes (**---**)
+The YAML header is surrounded by 3 dashes (**---**)
 
 --
 
@@ -195,6 +200,23 @@ output: html_document
 ---
 ```
 
+--
+
+Add a table of content:
+
+--
+
+
+```r
+---
+title: "TEST"
+author: "Sarah Bonnin"
+date: "12/8/2019"
+output: 
+  html_document:
+    toc: true
+---
+```
 
 ---
 
@@ -303,30 +325,7 @@ The following code:
 ```
 ````
 
-Renders as:
-
-
-```r
- ggplot(data=cars, aes(x=speed)) + geom_histogram()
-```
-
-```
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-```
-
-![](191212_rladies_rmarkdown_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
-
----
-
-## Code blocks: examples
-
-The following code:
-
-````r
-```{r, eval=TRUE, echo=TRUE, message=TRUE, fig.height=3}
- ggplot(data=cars, aes(x=speed)) + geom_histogram()
-```
-````
+--
 
 Renders as:
 
@@ -348,10 +347,12 @@ Renders as:
 The following code:
 
 ````r
-```{r, eval=TRUE, echo=TRUE, message=FALSE, fig.height=3}
+```{r, eval=TRUE, echo=TRUE, message=TRUE, fig.height=3}
  ggplot(data=cars, aes(x=speed)) + geom_histogram()
 ```
 ````
+
+--
 
 Renders as:
 
@@ -360,7 +361,34 @@ Renders as:
  ggplot(data=cars, aes(x=speed)) + geom_histogram()
 ```
 
+```
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
 ![](191212_rladies_rmarkdown_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+
+---
+
+## Code blocks: examples
+
+The following code:
+
+````r
+```{r, eval=TRUE, echo=TRUE, message=FALSE, fig.height=3}
+ ggplot(data=cars, aes(x=speed)) + geom_histogram()
+```
+````
+
+--
+
+Renders as:
+
+
+```r
+ ggplot(data=cars, aes(x=speed)) + geom_histogram()
+```
+
+![](191212_rladies_rmarkdown_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -374,9 +402,11 @@ The following code:
 ```
 ````
 
+--
+
 Renders as:
 
-![](191212_rladies_rmarkdown_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+![](191212_rladies_rmarkdown_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -389,6 +419,8 @@ The following code:
  ggplot(data=cars, aes(x=speed)) + geom_histogram()
 ```
 ````
+
+--
 
 Renders as:
 
@@ -409,6 +441,8 @@ The following code:
 ```
 ````
 
+--
+
 Renders as:
 
 
@@ -424,6 +458,8 @@ The following code:
  ggplot(data=cars,aes(x=speed))+geom_histogram()
 ```
 ````
+
+--
 
 Renders as:
 
@@ -469,6 +505,8 @@ ls *
 ## 191212_rladies_rmarkdown.html
 ## 191212_rladies_rmarkdown.Rmd
 ## README.md
+## test.html
+## test.rmd
 ## 
 ## 191212_rladies_rmarkdown_files:
 ## figure-html
@@ -574,16 +612,38 @@ You can **link** web pages:
 --
 
 ````r
-Here is a [link]("https://rmarkdown.rstudio.com/") to {rmarkdown} page on [R Studio](https://rstudio.com/) website.
+Here is a [link]("https://rmarkdown.rstudio.com/") 
+to {rmarkdown} page on [R Studio](https://rstudio.com/) website.
 ````
 
 --
 
-Here is a [link]("https://rmarkdown.rstudio.com/") to {rmarkdown} page on [R Studio](https://rstudio.com/) website.
+Here is a [link]("https://rmarkdown.rstudio.com/") 
+to {rmarkdown} page on [R Studio](https://rstudio.com/) website.
 
 ---
 
-## Tables
+## Create tables
+
+You can create tables:
+
+````r
+Date  | Workshop
+----- | -----
+12/12/2019 | R Markdown
+21/01/2020 | Forecasting
+````
+
+--
+
+Date  | Workshop
+----- | -----
+12/12/2019  | R Markdown
+21/01/2020  | Forecasting
+
+---
+
+## Show R objects as tables
 
 Format tables with **knitr::kable** and [**{kableExtra}**](http://haozhu233.github.io/kableExtra/awesome_table_in_html.html) package.
 
@@ -653,7 +713,7 @@ knitr::kable(head(iris))
 
 ---
 
-## Tables
+## Show R objects as tables
 
 **Bold** columns
 
@@ -724,7 +784,7 @@ knitr::kable(head(iris)) %&gt;%
 
 ---
 
-## Tables
+## Show R objects as tables
 
 **Colored** rows
 
@@ -795,20 +855,20 @@ knitr::kable(head(iris)) %&gt;%
 
 ---
 
-## Tables
+## Show R objects as tables
 
 Change **font size**
 
 ````r
 ```{r}
 knitr::kable(head(iris)) %&gt;%
-  kable_styling(font_size = 8)
+  kable_styling(font_size = 10)
 ```
 ````
 
 --
 
-&lt;table class="table" style="font-size: 8px; margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table" style="font-size: 10px; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:right;"&gt; Sepal.Length &lt;/th&gt;
@@ -866,14 +926,14 @@ knitr::kable(head(iris)) %&gt;%
 
 ---
 
-## Tables
+## Show R objects as tables
 
 All together
 
 ````r
 ```{r}
 knitr::kable(head(iris)) %&gt;%
-  kable_styling(font_size = 8) %&gt;%
+  kable_styling(font_size = 10) %&gt;%
   row_spec(1:3, color = "white", background = "red") %&gt;%
   column_spec(1:2, bold = TRUE)
 ```
@@ -881,7 +941,7 @@ knitr::kable(head(iris)) %&gt;%
 
 --
 
-&lt;table class="table" style="font-size: 8px; margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table" style="font-size: 10px; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:right;"&gt; Sepal.Length &lt;/th&gt;
@@ -942,7 +1002,7 @@ knitr::kable(head(iris)) %&gt;%
 
 ## Hands on !
 
-Modify your **.Rmd template**:
+Modify the **.Rmd template**:
 
 --
 
@@ -950,11 +1010,23 @@ Modify your **.Rmd template**:
 
 --
 
+* **plot(pressure)**: show code but hide plot.
+
+--
+
 * Format **summary(cars)** with **kable** and **{kableExtra}**: highlight in yellow the "Median" row.
 
 --
 
-* **plot(pressure)**: show code but hide plot.
+* Add the **table of content** (toc) option in the YAML header
+
+--
+
+* Add any modification you want (text, formatting, ...)
+
+--
+
+* **knit** !
 
 ---
 
@@ -1016,24 +1088,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     deleted = true;
   });
-})();
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
-
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
+})();</script>
 
 <script>
 (function() {

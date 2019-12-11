@@ -13,28 +13,31 @@ output:
       countIncrementalSlides: false
 ---
 
-## What is MarkDown ?
+## What is Markdown ?
+
+--
 
 * **Lightweight markup language** 
 
 --
 
-* Write **easy-to-read** and **easy-to-write** plain text format
+* **Easy-to-read** and **easy-to-write** plain text format
 
 --
 
-* Convertion into **HTML**
-
+* Rendered as **HTML** document through [Blackfriday](https://gohugo.io/getting-started/configuration/)
 
 ---
 
-## What is R MarkDown ?
-
-* **Simple formatting syntax** for authoring **HTML, PDF, and MS Word** documents.
+## What is R Markdown ?
 
 --
 
-* Includes R code that can be **shown** and/or **executed**
+* Advanced version of "plain" Markdown: **embeds** and **executes R code**
+
+--
+
+* **Simple formatting syntax** for authoring **HTML, PDF, and MS Word** documents.
 
 --
 
@@ -75,13 +78,13 @@ library(kableExtra)
 
 ---
 
-## R MarkDown Cheatsheet
+## R Markdown Cheatsheet
 
-R MarkDown [Cheatsheet](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)
+R Markdown [Cheatsheet](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)
 
 ---
 
-## R MarkDown (RMD) file
+## R Markdown (RMD) file
 
 * Plain text file
 
@@ -97,6 +100,14 @@ R MarkDown [Cheatsheet](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown
 
 ## How does it work?
 
+--
+
+```{r, out.width="90%", echo=FALSE, fig.align="center"}
+knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/61d189fd9cdf955058415d3e1b28dd60e1bd7c9b/b739c/lesson-images/rmarkdownflow.png")
+```
+
+--
+
 * **{rmarkdown}** feeds the input **.Rmd** file to **{knitr}**
 
 --
@@ -107,17 +118,11 @@ R MarkDown [Cheatsheet](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown
 
 * The **.md** file is then fed to **pandoc** that creates the final output
 
---
-
-```{r, out.width="90%", echo=FALSE, fig.align="center"}
-knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/61d189fd9cdf955058415d3e1b28dd60e1bd7c9b/b739c/lesson-images/rmarkdownflow.png")
-```
-
 ---
 
-## R MarkDown file and rendering
+## R Markdown file and rendering
 
-Exemple of a **source file** and its **rendering**:
+Example of a **source file** and its **rendering**:
 
 ```{r, out.width="100%", echo=FALSE, fig.align="center"}
 knitr::include_graphics("images/RMD_knit.png")
@@ -137,7 +142,7 @@ knitr::include_graphics("images/RMD_create.png")
 
 ## Create an .Rmd file in R Studio
 
-Choose output:
+Choose output format:
 
 ```{r, out.width="70%", echo=FALSE, fig.align="center"}
 knitr::include_graphics("images/RMD_choose_output.png")
@@ -146,7 +151,7 @@ knitr::include_graphics("images/RMD_choose_output.png")
 
 ---
 
-## Blocks
+## Template .Rmd file
 
 ```{r, out.width="65%", echo=FALSE, fig.align="center"}
 knitr::include_graphics("images/RMD_template.png")
@@ -156,7 +161,7 @@ knitr::include_graphics("images/RMD_template.png")
 
 ## First knit!
 
-Knit **.Rmd** file to HTML!
+Knit the template **.Rmd** file to HTML!
 
 ```{r, out.width="35%", echo=FALSE, fig.align="center"}
 knitr::include_graphics("images/RMD_knit_template.png")
@@ -193,7 +198,7 @@ str="`\u0060`"
 
 ## Header
 
-YAML header is surrounded by 3 dashes (**---**)
+The YAML header is surrounded by 3 dashes (**---**)
 
 --
 
@@ -206,6 +211,22 @@ output: html_document
 ---
 ```
 
+--
+
+Add a table of content:
+
+--
+
+```{r,eval=FALSE, echo=TRUE}
+---
+title: "TEST"
+author: "Sarah Bonnin"
+date: "12/8/2019"
+output: 
+  html_document:
+    toc: true
+---
+```
 
 ---
 
@@ -315,6 +336,8 @@ The following code:
 ```
 ````
 
+--
+
 Renders as:
 
 ```{r, eval=TRUE, echo=TRUE, message=TRUE}
@@ -332,6 +355,8 @@ The following code:
  ggplot(data=cars, aes(x=speed)) + geom_histogram()
 ```
 ````
+
+--
 
 Renders as:
 
@@ -351,6 +376,8 @@ The following code:
 ```
 ````
 
+--
+
 Renders as:
 
 ```{r, eval=TRUE, echo=TRUE, message=FALSE, fig.height=3}
@@ -368,6 +395,8 @@ The following code:
  ggplot(data=cars, aes(x=speed)) + geom_histogram()
 ```
 ````
+
+--
 
 Renders as:
 
@@ -387,6 +416,8 @@ The following code:
 ```
 ````
 
+--
+
 Renders as:
 
 ```{r, eval=FALSE, echo=TRUE, message=FALSE, fig.height=3}
@@ -405,6 +436,8 @@ The following code:
 ```
 ````
 
+--
+
 Renders as:
 
 ```{r, eval=FALSE, echo=FALSE, message=FALSE, fig.height=3}
@@ -422,6 +455,8 @@ The following code:
  ggplot(data=cars,aes(x=speed))+geom_histogram()
 ```
 ````
+
+--
 
 Renders as:
 
@@ -542,16 +577,38 @@ You can **link** web pages:
 --
 
 ````r
-Here is a [link]("https://rmarkdown.rstudio.com/") to {rmarkdown} page on [R Studio](https://rstudio.com/) website.
+Here is a [link]("https://rmarkdown.rstudio.com/") 
+to {rmarkdown} page on [R Studio](https://rstudio.com/) website.
 ````
 
 --
 
-Here is a [link]("https://rmarkdown.rstudio.com/") to {rmarkdown} page on [R Studio](https://rstudio.com/) website.
+Here is a [link]("https://rmarkdown.rstudio.com/") 
+to {rmarkdown} page on [R Studio](https://rstudio.com/) website.
 
 ---
 
-## Tables
+## Create tables
+
+You can create tables:
+
+````r
+Date  | Workshop
+----- | -----
+12/12/2019 | R Markdown
+21/01/2020 | Forecasting
+````
+
+--
+
+Date  | Workshop
+----- | -----
+12/12/2019  | R Markdown
+21/01/2020  | Forecasting
+
+---
+
+## Show R objects as tables
 
 Format tables with **knitr::kable** and [**{kableExtra}**](http://haozhu233.github.io/kableExtra/awesome_table_in_html.html) package.
 
@@ -569,7 +626,7 @@ knitr::kable(head(iris))
 
 ---
 
-## Tables
+## Show R objects as tables
 
 **Bold** columns
 
@@ -589,7 +646,7 @@ knitr::kable(head(iris)) %>%
 
 ---
 
-## Tables
+## Show R objects as tables
 
 **Colored** rows
 
@@ -609,14 +666,14 @@ knitr::kable(head(iris)) %>%
 
 ---
 
-## Tables
+## Show R objects as tables
 
 Change **font size**
 
 ````r
 `r ''````{r}
 knitr::kable(head(iris)) %>%
-  kable_styling(font_size = 8)
+  kable_styling(font_size = 10)
 ```
 ````
 
@@ -624,19 +681,19 @@ knitr::kable(head(iris)) %>%
 
 ```{r, echo=F}
 knitr::kable(head(iris)) %>%
-  kable_styling(font_size = 8)
+  kable_styling(font_size = 10)
 ```
 
 ---
 
-## Tables
+## Show R objects as tables
 
 All together
 
 ````r
 `r ''````{r}
 knitr::kable(head(iris)) %>%
-  kable_styling(font_size = 8) %>%
+  kable_styling(font_size = 10) %>%
   row_spec(1:3, color = "white", background = "red") %>%
   column_spec(1:2, bold = TRUE)
 ```
@@ -646,7 +703,7 @@ knitr::kable(head(iris)) %>%
 
 ```{r, echo=F}
 knitr::kable(head(iris)) %>%
-  kable_styling(font_size = 8) %>%
+  kable_styling(font_size = 10) %>%
   row_spec(1:3, color = "white", background = "red") %>%
   column_spec(1:2, bold = TRUE)
 ```
@@ -656,7 +713,7 @@ knitr::kable(head(iris)) %>%
 
 ## Hands on !
 
-Modify your **.Rmd template**:
+Modify the **.Rmd template**:
 
 --
 
@@ -664,11 +721,23 @@ Modify your **.Rmd template**:
 
 --
 
+* **plot(pressure)**: show code but hide plot.
+
+--
+
 * Format **summary(cars)** with **kable** and **{kableExtra}**: highlight in yellow the "Median" row.
 
 --
 
-* **plot(pressure)**: show code but hide plot.
+* Add the **table of content** (toc) option in the YAML header
+
+--
+
+* Add any modification you want (text, formatting, ...)
+
+--
+
+* **knit** !
 
 ---
 
