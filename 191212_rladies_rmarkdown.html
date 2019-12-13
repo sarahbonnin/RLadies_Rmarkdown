@@ -264,6 +264,45 @@ Superscript^2^
 
 ---
 
+## Format text
+### Headers
+
+--
+
+* Headers will be automatically organized in the **table of content** !
+
+--
+
+````r
+# Section 1
+## Subsection 1.1
+
+Some text
+
+## Subsection 1.2
+
+More text
+
+# Section 2
+
+## Subsection 2.1
+
+Text from section 2.1
+
+## Subsection 2.2
+
+Text from section 2.2
+````
+
+---
+
+## Format text
+### Headers
+
+&lt;img src="images/RMD_TOC_output.png" width="35%" style="display: block; margin: auto;" /&gt;
+
+---
+
 ## Lists
 
 ### unordered
@@ -315,6 +354,35 @@ Customize the rendering with **options**:
 
 ---
 
+## Code blocks
+### Load packages in the background
+
+--
+
+* **.Rmd** files are "independent": packages you will need in your code should be loaded **in a code block inside the document** !
+
+--
+
+* If you want to show **no output** and **no message** but still **execute the code**, use the option **include = FALSE**
+
+--
+
+* Load the packages you will need to run the code of your analysis, **at the beginning of the .Rmd file**:
+
+--
+
+````r
+```{r, include = FALSE}
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+```
+````
+
+
+
+---
+
 ## Code blocks: examples
 
 The following code:
@@ -338,7 +406,7 @@ Renders as:
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-![](191212_rladies_rmarkdown_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+![](191212_rladies_rmarkdown_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -365,7 +433,7 @@ Renders as:
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-![](191212_rladies_rmarkdown_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+![](191212_rladies_rmarkdown_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -388,7 +456,7 @@ Renders as:
  ggplot(data=cars, aes(x=speed)) + geom_histogram()
 ```
 
-![](191212_rladies_rmarkdown_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+![](191212_rladies_rmarkdown_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -406,7 +474,7 @@ The following code:
 
 Renders as:
 
-![](191212_rladies_rmarkdown_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+![](191212_rladies_rmarkdown_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -444,6 +512,10 @@ The following code:
 --
 
 Renders as:
+
+--
+
+NOTHING! No code, no output, no message...
 
 
 
@@ -505,8 +577,6 @@ ls *
 ## 191212_rladies_rmarkdown.html
 ## 191212_rladies_rmarkdown.Rmd
 ## README.md
-## test.html
-## test.rmd
 ## 
 ## 191212_rladies_rmarkdown_files:
 ## figure-html
@@ -519,6 +589,7 @@ ls *
 ## RMD_knit_template.png
 ## RMD_options.png
 ## RMD_template.png
+## RMD_TOC_output.png
 ## 
 ## libs:
 ## kePrint-0.0.1
@@ -572,7 +643,7 @@ Recommended / easier to format way with **knitr::include_graphics**:
 
 ````r
 ```{r}
-knitr::include_graphics("ihttps://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png")
+knitr::include_graphics("https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png")
 ```
 ````
 
@@ -596,7 +667,7 @@ Recommended / easier to format way with **knitr::include_graphics**:
 
 ````r
 ```{r, out.width="50%", echo=FALSE, fig.align="center"}
-knitr::include_graphics("ihttps://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png")
+knitr::include_graphics("https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png")
 ```
 ````
 
@@ -997,6 +1068,159 @@ knitr::kable(head(iris)) %&gt;%
 &lt;/tbody&gt;
 &lt;/table&gt;
 
+---
+
+## Show R objects as tables
+
+Add extra headers
+
+````r
+```{r}
+knitr::kable(head(iris)) %&gt;%
+  kable_styling(font_size = 10) %&gt;%
+  row_spec(1:3, color = "white", background = "red") %&gt;%
+  column_spec(1:2, bold = TRUE) %&gt;%
+  add_header_above(c("Sepal" = 2, "Petal" = 2, " " = 1))
+```
+````
+
+--
+
+&lt;table class="table" style="font-size: 10px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; "&gt;Sepal&lt;/div&gt;&lt;/th&gt;
+&lt;th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; "&gt;Petal&lt;/div&gt;&lt;/th&gt;
+&lt;th style="border-bottom:hidden" colspan="1"&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; Sepal.Length &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sepal.Width &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Petal.Length &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Petal.Width &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Species &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;color: white !important;background-color: red !important;font-weight: bold;"&gt; 5.1 &lt;/td&gt;
+   &lt;td style="text-align:right;color: white !important;background-color: red !important;font-weight: bold;"&gt; 3.5 &lt;/td&gt;
+   &lt;td style="text-align:right;color: white !important;background-color: red !important;"&gt; 1.4 &lt;/td&gt;
+   &lt;td style="text-align:right;color: white !important;background-color: red !important;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;color: white !important;background-color: red !important;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;color: white !important;background-color: red !important;font-weight: bold;"&gt; 4.9 &lt;/td&gt;
+   &lt;td style="text-align:right;color: white !important;background-color: red !important;font-weight: bold;"&gt; 3.0 &lt;/td&gt;
+   &lt;td style="text-align:right;color: white !important;background-color: red !important;"&gt; 1.4 &lt;/td&gt;
+   &lt;td style="text-align:right;color: white !important;background-color: red !important;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;color: white !important;background-color: red !important;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;color: white !important;background-color: red !important;font-weight: bold;"&gt; 4.7 &lt;/td&gt;
+   &lt;td style="text-align:right;color: white !important;background-color: red !important;font-weight: bold;"&gt; 3.2 &lt;/td&gt;
+   &lt;td style="text-align:right;color: white !important;background-color: red !important;"&gt; 1.3 &lt;/td&gt;
+   &lt;td style="text-align:right;color: white !important;background-color: red !important;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;color: white !important;background-color: red !important;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;font-weight: bold;"&gt; 4.6 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;"&gt; 3.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;font-weight: bold;"&gt; 5.0 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;"&gt; 3.6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;font-weight: bold;"&gt; 5.4 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;"&gt; 3.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+## Show R objects as tables
+
+Conditional formatting
+
+````r
+```{r}
+head(iris) %&gt;%
+mutate(
+  Petal.Length = cell_spec(Petal.Length, "html", color = ifelse(Petal.Length &gt; 1.4, "red", "blue"))
+) %&gt;%
+kable(format="html", escape=FALSE) %&gt;%
+kable_styling("striped", full_width = F, font_size = 10)
+```
+````
+
+--
+
+&lt;table class="table table-striped" style="font-size: 10px; width: auto !important; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; Sepal.Length &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sepal.Width &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Petal.Length &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Petal.Width &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Species &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.5 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: blue !important;"&gt;1.4&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.0 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: blue !important;"&gt;1.4&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: blue !important;"&gt;1.3&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4.6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: red !important;"&gt;1.5&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.6 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: blue !important;"&gt;1.4&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.9 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: red !important;"&gt;1.7&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 ---
 
@@ -1088,7 +1312,24 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     deleted = true;
   });
-})();</script>
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
 (function() {
