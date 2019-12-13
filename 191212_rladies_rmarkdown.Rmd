@@ -273,6 +273,47 @@ Superscript^2^
 
 ---
 
+## Format text
+### Headers
+
+--
+
+* Headers will be automatically organized in the **table of content** !
+
+--
+
+````r
+# Section 1
+## Subsection 1.1
+
+Some text
+
+## Subsection 1.2
+
+More text
+
+# Section 2
+
+## Subsection 2.1
+
+Text from section 2.1
+
+## Subsection 2.2
+
+Text from section 2.2
+````
+
+---
+
+## Format text
+### Headers
+
+```{r, out.width="35%", echo=FALSE, fig.align="center"}
+knitr::include_graphics("images/RMD_TOC_output.png")
+```
+
+---
+
 ## Lists
 
 ### unordered
@@ -322,6 +363,39 @@ Customize the rendering with **options**:
 
 ```{r, out.width="95%", echo=FALSE, fig.align="center"}
 knitr::include_graphics("images/RMD_options.png")
+```
+
+---
+
+## Code blocks
+### Load packages in the background
+
+--
+
+* **.Rmd** files are "independent": packages you will need in your code should be loaded **in a code block inside the document** !
+
+--
+
+* If you want to show **no output** and **no message** but still **execute the code**, use the option **include = FALSE**
+
+--
+
+* Load the packages you will need to run the code of your analysis, **at the beginning of the .Rmd file**:
+
+--
+
+````r
+`r ''````{r, include = FALSE}
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+```
+````
+
+```{r, include=FALSE}
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
 ```
 
 ---
@@ -440,6 +514,10 @@ The following code:
 
 Renders as:
 
+--
+
+NOTHING! No code, no output, no message...
+
 ```{r, eval=FALSE, echo=FALSE, message=FALSE, fig.height=3}
  ggplot(data=cars, aes(x=speed)) + geom_histogram()
 ```
@@ -538,7 +616,7 @@ Recommended / easier to format way with **knitr::include_graphics**:
 
 ````r
 `r ''````{r}
-knitr::include_graphics("ihttps://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png")
+knitr::include_graphics("https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png")
 ```
 ````
 
@@ -559,7 +637,7 @@ Recommended / easier to format way with **knitr::include_graphics**:
 
 ````r
 `r ''````{r, out.width="50%", echo=FALSE, fig.align="center"}
-knitr::include_graphics("ihttps://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png")
+knitr::include_graphics("https://rladies.org/wp-content/uploads/2016/12/R-LadiesGlobal.png")
 ```
 ````
 
@@ -708,6 +786,59 @@ knitr::kable(head(iris)) %>%
   column_spec(1:2, bold = TRUE)
 ```
 
+---
+
+## Show R objects as tables
+
+Add extra headers
+
+````r
+`r ''````{r}
+knitr::kable(head(iris)) %>%
+  kable_styling(font_size = 10) %>%
+  row_spec(1:3, color = "white", background = "red") %>%
+  column_spec(1:2, bold = TRUE) %>%
+  add_header_above(c("Sepal" = 2, "Petal" = 2, " " = 1))
+```
+````
+
+--
+
+```{r, echo=F}
+knitr::kable(head(iris)) %>%
+  kable_styling(font_size = 10) %>%
+  row_spec(1:3, color = "white", background = "red") %>%
+  column_spec(1:2, bold = TRUE) %>%
+  add_header_above(c("Sepal" = 2, "Petal" = 2, " " = 1))
+```
+
+---
+
+## Show R objects as tables
+
+Conditional formatting
+
+````r
+`r ''````{r}
+head(iris) %>%
+mutate(
+  Petal.Length = cell_spec(Petal.Length, "html", color = ifelse(Petal.Length > 1.4, "red", "blue"))
+) %>%
+kable(format="html", escape=FALSE) %>%
+kable_styling("striped", full_width = F, font_size = 10)
+```
+````
+
+--
+
+```{r, echo=F}
+head(iris) %>%
+mutate(
+  Petal.Length = cell_spec(Petal.Length, "html", color = ifelse(Petal.Length > 1.4, "red", "blue"))
+) %>%
+kable(format="html", escape=FALSE) %>%
+kable_styling("striped", full_width = F, font_size = 10)
+```
 
 ---
 
